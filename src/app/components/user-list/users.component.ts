@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from './user';
-import {UserService} from './user.service';
+import {User} from '../../models/user.model';
+import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'my-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['../../app.component.css'],
   providers: [UserService]
 })
 
@@ -32,7 +32,7 @@ export class UsersComponent implements OnInit {
   }
 
   update(id: string): void {
-    this.router.navigate(['/update', id]);
+    this.router.navigate(['/update/user', id]);
   }
 
   remove(id: string): void {
@@ -43,6 +43,9 @@ export class UsersComponent implements OnInit {
   }
 
   viewDetail(id: string): void {
-    this.router.navigate(['/detail', id]);
+    this.router.navigate(['/detail/user', id]);
   }
+
+
+
 }

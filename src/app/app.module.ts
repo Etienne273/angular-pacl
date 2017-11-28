@@ -7,21 +7,31 @@ import {AppRoutingModule} from './app-routing.module';
 
 // Components
 import {AppComponent} from './app.component';
-import {UsersComponent} from './users.component';
-import {UserDetailComponent} from './user-detail.component';
-import {DashboardComponent} from './dashboard.component';
-import {UserAddComponent} from './user-add.component';
-import {UserUpdateComponent} from './user-update.component';
+import {UsersComponent} from './components/user-list/users.component';
+import {UserDetailComponent} from './components/user-list/details-user/user-detail.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {UserAddComponent} from './components/user-list/add-user/user-add.component';
+import {UserUpdateComponent} from './components/user-list/update-user/user-update.component';
+import {RecipeListComponent} from './components/recipe-list/recipe-list.component';
+import {RecipeAddComponent} from './components/recipe-list/add-recipe/recipe-add.component';
+import {RecipeUpdateComponent} from './components/recipe-list/update-recipe/recipe-update.component';
 
 // Services
-import {UserService} from './user.service';
+import {UserService} from './services/user.service';
+import {RecipeService} from './services/recipe.service';
+import {RecipeDetailComponent} from "./components/recipe-list/details-recipe/recipe-detail.component";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     UserDetailComponent,
     UsersComponent,
+    RecipeListComponent,
+    RecipeAddComponent,
+    RecipeUpdateComponent,
     DashboardComponent,
+    RecipeDetailComponent,
     UserAddComponent,
     UserUpdateComponent
   ],
@@ -32,7 +42,7 @@ import {UserService} from './user.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [UserService],
+  providers: [UserService, RecipeService],
   bootstrap: [AppComponent]
 })
 

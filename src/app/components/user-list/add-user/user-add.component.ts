@@ -1,15 +1,15 @@
 import 'rxjs/add/operator/switchMap';
 import {Component} from '@angular/core';
-import {User} from './user';
+import {User} from '../../../models/user.model';
 import {Router} from '@angular/router';
-import {UserService} from "./user.service";
+import {UserService} from '../../../services/user.service';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {Location} from "@angular/common";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'add-user',
   templateUrl: './user-add.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['../../../app.component.css']
 })
 
 export class UserAddComponent {
@@ -25,10 +25,8 @@ export class UserAddComponent {
 
   buildForm(): void {
     this.userAddForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
-      mobileNumber: ['', Validators.required],
+      name: ['', Validators.required],
+      imagePath: ['', Validators.required]
     });
   }
 
@@ -38,7 +36,7 @@ export class UserAddComponent {
       .then(response => {
         console.log('response', response);
         this.router.navigate(['/users']);
-      })
+      });
   }
 
   goBack(): void {

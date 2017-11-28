@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
-import {User} from "./user";
+import {User} from '../models/user.model';
 import {Headers, Http} from '@angular/http';
+import {environment} from 'environments/environment';
 
 @Injectable()
 export class UserService {
 
   private host = window.location.hostname;
   private headers = new Headers({'Content-Type': 'application/json'});
-  private usersURL = `http://${this.host}:8080/api/v1/users`;
+  private usersURL = environment.serverUrl + '/users';
 
   constructor(private http: Http) {
   };
@@ -31,8 +32,8 @@ export class UserService {
    * @param id:string
    * @returns {Promise<User>}
    */
-  getUser(id: string): Promise<User> {
-    const url = `${this.usersURL}/${id}`;
+  getUser(_id: string): Promise<User> {
+    const url = `${this.usersURL}/${_id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json() as User)
@@ -44,11 +45,11 @@ export class UserService {
    * @param user:User
    * @returns {Promise<User>}
    */
-  add(user: User): Promise<User>{
+  add(user: User): Promise<User> {
     return this.http.post(this.usersURL, JSON.stringify(user), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as User)
-      .catch(this.handleError)
+      .catch(this.handleError);
   }
 
   /**
@@ -56,11 +57,12 @@ export class UserService {
    * @param user:User
    * @returns {Promise<User>}
    */
-  update(user: User): Promise<User>{
-    return this.http.put(`${this.usersURL}/${user._id}`, JSON.stringify(user), {headers: this.headers})
+  update(user: User): Promise<User> {
+    console.log(user);
+    return this.http.put(this.usersURL + '/' + user._id, JSON.stringify(user), {headers: this.headers})
       .toPromise()
       .then(response => response.json() as User)
-      .catch(this.handleError)
+      .catch(this.handleError);
   }
 
   /**
@@ -72,7 +74,7 @@ export class UserService {
     return this.http.delete(`${this.usersURL}/${id}`)
       .toPromise()
       .then(response => console.log(response))
-      .catch(this.handleError)
+      .catch(this.handleError);
   }
 
   /**
